@@ -1,0 +1,28 @@
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Imagen</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{product.Tipo}}</td>
+            <td>{{product.Precio}}</td>
+            <td>{{product.Stock}}</td>
+            <td><img [src]="product.image" [alt]="product.Tipo"></td>
+        </tr>
+        <tr>
+            <td>Plato</td>
+            <td>9800</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Compotera</td>
+            <td>5500</td>
+            <td>6</td>
+        </tr>
+    </tbody>
+</table>
