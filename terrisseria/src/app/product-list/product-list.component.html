@@ -1,28 +1,22 @@
 <table class="table table-borderless">
     <thead>
         <tr>
-            <th>Tipo</th>
+            <th>Imagen</th>
+            <th>Tipo producto</th>
             <th>Precio</th>
             <th>Stock</th>
-            <th>Imagen</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>{{product.Tipo}}</td>
-            <td>{{product.Precio}}</td>
-            <td>{{product.Stock}}</td>
-            <td><img [src]="product.image" [alt]="product.Tipo"></td>
-        </tr>
-        <tr>
-            <td>Plato</td>
-            <td>9800</td>
-            <td>4</td>
-        </tr>
-        <tr>
-            <td>Compotera</td>
-            <td>5500</td>
-            <td>6</td>
+        <tr *ngFor="let product of products" [ngClass]="{'clearance': product.clearance}" >
+            <td><img [src]="product.image" [alt]="product.tipo"></td>
+            <td>{{product.tipo}}</td>
+            <td>{{product.precio | currency}}</td>
+            <td>
+                <span class="badge badge-warning" *ngIf="product.stock==0">Producto no disponible</span>
+                <span class="badge badge-warning" *ngIf="product.stock==1">Ultimo disponible</span>
+            </td>
+            <td><button class="badge badge-success">Comprar</button></td>
         </tr>
     </tbody>
 </table>
