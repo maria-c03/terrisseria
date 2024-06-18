@@ -27,6 +27,7 @@ export class ProductListComponent {
     precio: 8300,
     stock: 15,
     clearance:true,
-  }
+  },
+  
   ]
 }
