@@ -5,32 +5,10 @@
             <th>Tipo producto</th>
             <th>Precio</th>
             <th>Stock</th>
+            <th>Comprar</th>
         </tr>
     </thead>
     <tbody>
-        @for (product of products; track product.tipo){
-            <tr>
-                <td><img [src]="product.image" [alt]="product.tipo"></td>
-                <td>{{product.tipo}}</td>
-                <td>{{product.precio | currency}}</td>
-                @if (product.stock == 1){
-                    <td>
-                        <span class="badge badge-warning">Ultimo disponible</span>
-                    </td>
-                } @else if (product.stock == 0) {
-                    <td>
-                        <span class="badge badge-warning" >Producto no disponible</span>
-                    </td>
-                } @else {
-                    <td>{{product.stock}}</td>
-                }
-                <td><button class="badge badge-success">Comprar</button></td>
-            </tr>
-        } @empty {
-            <tr>
-                <td colspan="4"> No hay productos para mostrar</td>
-            </tr>
-        }
         <!-- <tr *ngFor="let product of products" [ngClass]="{'clearance': product.clearance}" >
             <td><img [src]="product.image" [alt]="product.tipo"></td>
             <td>{{product.tipo}}</td>
@@ -41,5 +19,38 @@
             </td>
             <td><button class="badge badge-success">Comprar</button></td>
         </tr> -->
+        @for (product of products; track product.tipo ) {
+            <tr [ngClass]="{'clearance': product.clearance}">
+                <td><img class="img-thumbnail" [src]="product.image" [alt]="product.tipo"></td>
+                <td>{{product.tipo}}</td>
+                <td>{{product.precio | currency}}</td>
+                @if (product.stock == 1) {
+                    <td>
+                        <span class="badge badge-warning">Ultimo disponible</span>
+                    </td>
+                } @else if (product.stock == 0) {
+                    <td>
+                        <span class="badge badge-warning" >Producto no disponible</span>
+                    </td>
+                } @else {
+                    <td>{{product.stock}}</td>
+                }
+                <td>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button  class="btn btn-outline-success btn-sm" (click)="downQuantity(product)">-</button>
+                        </div>
+                        <input  type="number" [(ngModel)]="product.quantity" (keyup)="onChangeQuantity($event, product)" >
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-success btn-sm"(click)="upQuantity(product)">+</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="4"> No hay productos para mostrar</td>
+            </tr>
+        }
     </tbody>
 </table>
