@@ -1,1 +1,20 @@
-<p>cart works!</p>
+<h3>Carrito de compras</h3>
+<table>
+    <thead>
+        <tr>
+            <th>tipo</th>
+            <th>precio</th>
+            <th>cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <tr *ngFor="let product of products">
+            <td>{{product.tipo}}</td>
+            <td>{{product.precio | currency}}</td>
+            <td>{{product.quantity}}</td>
+        </tr>
+    </tbody>
+    <p class="text-end">Total</p>
+    <button>Comprar</button>
+</table>

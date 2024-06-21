@@ -33,25 +33,4 @@ export class ProductListComponent {
   },
   ]
 
-  upQuantity(product: Product): void{
-    if(product.quantity < product.stock)
-    product.quantity++;
-  }
-
-  downQuantity(product: Product): void{
-    if(product.quantity>0)
-    product.quantity--;
-
-  }
-  onChangeQuantity(event: any, product: Product): void {
-    if(product.stock < product.quantity){
-      product.quantity = product.stock;
-      console.log("no podes pedir mas")
-    }
-    if(product.quantity < 0){
-      product.quantity = 0;
-      console.log("no podes pedir menos de 0")
-    }
-    event.preventDefault(event);
-  }
 }

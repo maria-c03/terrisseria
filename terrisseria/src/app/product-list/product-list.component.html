@@ -36,15 +36,7 @@
                     <td>{{product.stock}}</td>
                 }
                 <td>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <button  class="btn btn-outline-success btn-sm" (click)="downQuantity(product)">-</button>
-                        </div>
-                        <input  type="number" [(ngModel)]="product.quantity" (keyup)="onChangeQuantity($event, product)" >
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-success btn-sm"(click)="upQuantity(product)">+</button>
-                        </div>
-                    </div>
+                    <app-input-integer [(quantity)]="product.quantity" [max]="product.stock"></app-input-integer>
                 </td>
             </tr>
         } @empty {

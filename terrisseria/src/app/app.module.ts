@@ -8,13 +8,15 @@ import { CartComponent } from './cart/cart.component';
 import { FormsModule } from '@angular/forms';
 import { ContactComponent } from './contact/contact.component';
 import { TerrisseriaProductsComponent } from './terrisseria-products/terrisseria-products.component';
+import { InputIntegerComponent } from './input-integer/input-integer.component';
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
     CartComponent,
     ContactComponent,
-    TerrisseriaProductsComponent
+    TerrisseriaProductsComponent,
+    InputIntegerComponent
   ],
   imports: [
     BrowserModule,
