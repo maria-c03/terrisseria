@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from '../product-list/product';
+import { ProductCartService } from '../product-cart.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -7,30 +9,9 @@ import { Product } from '../product-list/product';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-  products: Product []= 
-  [{
-    image: "img/taza.jpg",
-    tipo: "Taza",
-    precio: 9500,
-    stock: 1,
-    clearance:false,
-    quantity:0,
-  },
-  {
-    image: "img/plato.jpg",
-    tipo: "Plato",
-    precio: 12000,
-    stock: 0,
-    clearance: false,
-    quantity:0,
-  },
-  {
-    image: "img/compotera.jpg",
-    tipo: "Compotera",
-    precio: 8300,
-    stock: 15,
-    clearance:true,
-    quantity:0,
-  },
-  ]
+  cartList$: Observable<Product[]>;
+  constructor(private cart: ProductCartService){
+    // cart.cartList.subscribe((observable) => this.cartList = observable);
+    this.cartList$ = cart.cartList.asObservable();
+  }
 }

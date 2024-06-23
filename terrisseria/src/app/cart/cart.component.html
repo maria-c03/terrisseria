@@ -9,7 +9,7 @@
     </thead>
     <tbody>
         <tr>
-            <tr *ngFor="let product of products">
+            <tr *ngFor="let product of cartList$ | async">
             <td>{{product.tipo}}</td>
             <td>{{product.precio | currency}}</td>
             <td>{{product.quantity}}</td>
