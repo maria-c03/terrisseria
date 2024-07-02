@@ -25,7 +25,10 @@ export class CartComponent {
     );
   }
 
-    clearCart(): void {
+  buyProduct(){
+    alert("gracias por su compra")
+  }
+  clearCart(): void {
     this.cart.clearCart();
   }
 }

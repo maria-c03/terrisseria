@@ -17,7 +17,7 @@
     </tbody>
     <p class="text-end">Total: {{total |async| currency}}</p>
     <div class="button">
-        <button class="btn-success">Comprar</button>
+        <button class="btn-success" (click)="buyProduct()">Comprar</button>
         <button class="btn-danger" (click)="clearCart()">Vaciar</button>
     </div>
 </table>
