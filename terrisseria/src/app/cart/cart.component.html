@@ -15,6 +15,9 @@
             <td>{{product.quantity}}</td>
         </tr>
     </tbody>
-    <p class="text-end">Total</p>
-    <button>Comprar</button>
+    <p class="text-end">Total: {{total |async| currency}}</p>
+    <div class="button">
+        <button class="btn-success">Comprar</button>
+        <button class="btn-danger" (click)="clearCart()">Vaciar</button>
+    </div>
 </table>

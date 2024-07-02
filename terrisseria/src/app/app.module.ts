@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { ContactComponent } from './contact/contact.component';
 import { TerrisseriaProductsComponent } from './terrisseria-products/terrisseria-products.component';
 import { InputIntegerComponent } from './input-integer/input-integer.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,9 +23,11 @@ import { InputIntegerComponent } from './input-integer/input-integer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi())
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

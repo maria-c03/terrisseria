@@ -21,7 +21,8 @@
         </tr> -->
         @for (product of products; track product.tipo ) {
             <tr [ngClass]="{'clearance': product.clearance}">
-                <td><img class="img-thumbnail" [src]="product.image" [alt]="product.tipo"></td>
+                
+                <td><img class="img-thumbnail" [src]="product.imagen" [alt]="product.tipo"></td>
                 <td>{{product.tipo}}</td>
                 <td>{{product.precio | currency}}</td>
                 @if (product.stock == 1) {
@@ -35,7 +36,7 @@
                 } @else {
                     <td>{{product.stock}}</td>
                 }
-                <td>
+                <td class="tdCompra">
                     <app-input-integer [(quantity)]="product.quantity" [max]="product.stock"></app-input-integer>
                     <button class="btn btn-primary" (click)="addToCart(product)">Comprar</button>
                 </td>

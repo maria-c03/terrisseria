@@ -1,40 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from './product';
 import { ProductCartService } from '../product-cart.service';
+import { ProductDataService } from '../product-data.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
-  products: Product []= 
-  [{
-    image: "img/taza.jpg",
-    tipo: "Taza",
-    precio: 9500,
-    stock: 1,
-    clearance:false,
-    quantity:0,
-  },
-  {
-    image: "img/plato.jpg",
-    tipo: "Plato",
-    precio: 12000,
-    stock: 0,
-    clearance: false,
-    quantity:0,
-  },
-  {
-    image: "img/compotera.jpg",
-    tipo: "Compotera",
-    precio: 8300,
-    stock: 15,
-    clearance:true,
-    quantity:0,
-  },
-  ]
+  products: Product []= [];
+  
+  constructor(private cart: ProductCartService, private productsDataService: ProductDataService){
+  }
 
-  constructor(private cart: ProductCartService){
+  ngOnInit():void{
+    this.productsDataService.getAll().subscribe(products => {
+      this.products = products
+  });
+  this.cart.cartCleared.subscribe(() => {
+    this.ngOnInit();
+  });
+   
   }
 
   addToCart(product: Product): void{
@@ -42,4 +28,5 @@ export class ProductListComponent {
     product.stock -=product.quantity;
     product.quantity = 0;
   }
+
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Product } from './product-list/product';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
@@ -6,22 +6,31 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
   providedIn: 'root'
 })
 export class ProductCartService {
-  // convierto la variable que quiero observar en privada
-  private _cartList: Product[]=[];
-  cartList: BehaviorSubject<Product[]> = new BehaviorSubject (this._cartList);
+  private _cartList: Product[] = [];
+  cartList: BehaviorSubject<Product[]> = new BehaviorSubject(this._cartList);
+  cartCleared: EventEmitter<void> = new EventEmitter<void>(); // Evento para notificar que el carrito ha sido vaciado
 
 
   constructor() { }
 
-  addToCart(product: Product){
-    let item = this._cartList.find((v1) => v1.tipo == product.tipo);
-    if(!item){
-      this._cartList.push({ ... product});
-    }else{
-      item.quantity += product.quantity;
+  addToCart(product: Product) {
+    if (product.quantity > 0) {
+      let item = this._cartList.find((v1) => v1.tipo == product.tipo);
+      if (!item) {
+        this._cartList.push({ ...product });
+      } else {
+        item.quantity += product.quantity;
+      }
+      // Notificar el cambio en la lista del carrito
+      this.cartList.next(this._cartList);
     }
-    console.log(this._cartList);
-    // al behaviorSubject le digo que actualice el valor y notifique que hubo un cambio en mi variable privada
+  }
+
+  clearCart(): void {
+    // Vaciar el carrito
+    this._cartList = [];
     this.cartList.next(this._cartList);
+     // Emitir el evento de que el carrito ha sido vaciado
+    this.cartCleared.emit();
   }
 }

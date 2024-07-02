@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Product } from '../product-list/product';
 
 @Component({
   selector: 'app-input-integer',
@@ -10,12 +9,14 @@ export class InputIntegerComponent {
   constructor(){}
   
   @Input()
-  quantity!: number;
-  // consultar !
+  quantity: number = 0;
+
   @Input()
-  max!: number;
+  max: number = 0;
+
   @Output()
-  quantityChange: EventEmitter<number> =new EventEmitter<number>;
+  quantityChange: EventEmitter<number> =new EventEmitter<number>();
+
   ngOnInit():void{}
 
   upQuantity(): void{
